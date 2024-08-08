@@ -17,7 +17,7 @@ Incrementing by one gives 4321 + 1 = 4322.
 Thus, the result should be [4,3,2,2].
 '''
 
-def increment(arr, index):
+def increment_recursion(arr, index):
     if(index == -1):
         arr.insert(0,1) 
         return 
@@ -25,9 +25,22 @@ def increment(arr, index):
     arr[index] +=1
     if(arr[index] == 10):
         arr[index] = 0
-        increment(arr, index -1)
+        increment_recursion(arr, index -1)
+
+
+def increment_loop(arr):
+    size = len(arr)
+    
+    for i in range(size-1, -1, -1):
+        arr[i] +=1
+        if(arr[i] < 10):
+            return
+        arr[i] = 0
+    #if we exit the loop, meaning we had a cary over all the digits
+    arr.insert(0,1)
 
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        increment(digits, len(digits)-1)
+        #increment_recursion(digits, len(digits)-1)
+        increment_loop(digits)
         return digits
