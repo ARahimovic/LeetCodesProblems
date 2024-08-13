@@ -20,21 +20,36 @@ Explanation: 215 + 806 = 1021
 '''
 
 ## take to much time and not python specific
+
+# class Solution:
+#     def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+#         intNum = 0
+#         n = len(num)
+#         for i in range(n-1,-1,-1):
+#             intNum+= num[i] * pow(10,n-1-i)
+        
+#         result = intNum + k
+#         resultList = []
+#         while result != 0 :
+#             resultList.append(result % 10)
+#             result //= 10
+
+#         resultList.reverse()
+#         return resultList
+
+
+import sys
+# Increase the maximum number of digits allowed for integer string conversion
+sys.set_int_max_str_digits(10000) 
+
 class Solution:
     def addToArrayForm(self, num: List[int], k: int) -> List[int]:
-        intNum = 0
-        n = len(num)
-        for i in range(n-1,-1,-1):
-            intNum+= num[i] * pow(10,n-1-i)
-        
-        result = intNum + k
-        resultList = []
-        while result != 0 :
-            resultList.append(result % 10)
-            result //= 10
-
-        resultList.reverse()
+        #convert the int array to string then convert the string to an int
+        myInt = int(''.join(map(str, num)))
+        result = myInt + k
+        #reconvert the result to string then make a list of each char
+        resultList = [int(digit) for digit in str(result)]
         return resultList
-
+        
 
         
