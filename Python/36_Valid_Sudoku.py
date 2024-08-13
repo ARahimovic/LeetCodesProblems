@@ -29,6 +29,29 @@ def is_value_possible(board, x,y):
                 return False
     return True
 
+def is_value_possible_using_sets(board, x, y):
+    row_set = set()
+    column_set = set()
+    subgrid_set = set()
+
+    for i in range(9):
+        if board[x][i] in row_set:
+            return False
+        row_set.add(board[x][i])
+    
+        if board[i][y] in column_set:
+            return False
+        column_set.add(board[i][y])
+
+        subgrid_row = x//3 * 3 + i // 3
+        subgrid_column = y//3 * 3 + i % 3
+        
+        if(board[subgrid_row][subgrid_column] in subgrid_set):
+            return False
+        subgrid_set.add(board[subgrid_row][subgrid_column])
+                    
+
+
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         for i in range(len(board)):
