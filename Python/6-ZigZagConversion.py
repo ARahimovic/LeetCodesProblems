@@ -36,14 +36,20 @@ class Solution:
     def convert(self, s: str, numRows: int) -> str:
         if not s :
             return ""
-        n = len(s)
-        rows = [""] * numRows
 
-        index = (numRows - 1)*2
+        if(numRows == 1 or numRows >= len(s)):
+            return s
 
-        for i,c in enumerate(s):
-            if(i % index == 0):
-                rows[0].append(c)
-                rows[0].append(" "*numRows-2)
+        currentRow = 0
+        goingDown = False
+        rows = [""]*numRows
+
+        for c in s:
+            rows[currentRow] += c
+
+            if(currentRow == 0 or currentRow == numRows - 1):
+                isGoingDown = not isGoingDown
+            
+            currentRow += 1 if isGoingDown else -1
         
-        print(rows[0])
+        return "".join(rows)
