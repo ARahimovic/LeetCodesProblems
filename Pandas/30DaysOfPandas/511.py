@@ -50,3 +50,5 @@ def game_analysis(activity: pd.DataFrame) -> pd.DataFrame:
     new_df = activity.sort_values(by='event_date').drop_duplicates(subset="player_id")
     new_df.rename(columns={'event_date':'first_login'}, inplace=True)
     return new_df[['player_id','first_login']] 
+ 
+    return activity.groupby("player_id", as_index=False)["event_date"].min().rename(columns={"event_date": "first_login"})
